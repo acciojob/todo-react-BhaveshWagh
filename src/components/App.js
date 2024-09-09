@@ -1,6 +1,5 @@
-
 import React from "react";
-import './../styles/App.css';
+import "./../styles/App.css";
 import { useState } from "react";
 
 const TodoList = () => {
@@ -12,15 +11,18 @@ const TodoList = () => {
   const addTodo = () => {
     if (inputValue.trim()) {
       setTodos([...todos, inputValue]);
-      console.log(todos)
+      //console.log(todos)
       setInputValue(""); // Clear input field after adding
     }
   };
 
   // Function to handle deleting a todo
   const deleteTodo = (index) => {
-    const newTodos = todos.filter((_, i) => i !== index);
+    const newTodos = [...todos]; // Create a copy of the current todos array
+    newTodos.splice(index, 1); // Remove the item at the given index
     setTodos(newTodos);
+    // const newTodos = todos.filter((_, i) => i !== index);
+    // setTodos(newTodos);
   };
 
   return (
@@ -31,7 +33,6 @@ const TodoList = () => {
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         placeholder="Enter a task"
-       
       />
       <button onClick={addTodo}>Add Todo</button>
       <ul style={{ listStyleType: "none", padding: "0", marginTop: "20px" }}>
